@@ -1,5 +1,15 @@
 var jump = require('./modules/adb/jump').jump;
-var get_screen = require('./modules/adb/get_screen').get_screen;
-var getDistence = require('./modules/')
+var get_screen = require('./modules/adb/get_screen').handle;
+var getDistence = require('./modules/distence/getDistence').handle;
 
-get_screen();
+var main = function(){
+	get_screen().then(()=>{
+		return getDistence();
+	}).then(()=>{
+		setTimeout(function(){
+			main();
+		}, 15000)
+	})
+}
+
+main();
